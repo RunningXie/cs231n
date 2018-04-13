@@ -34,11 +34,11 @@ class LinearClassifier(object):
     num_classes = np.max(y) + 1 # assume y takes values 0...K-1 where K is number of classes
     if self.W is None:
       # lazily initialize W
-      self.W = 0.001 * np.random.randn(dim, num_classes)
+      self.W = 0.001 * np.random.randn(dim, num_classes)#np.random.randn()生成[0,1)范围的正态分布矩阵
 
     # Run stochastic gradient descent to optimize W
     loss_history = []
-    for it in xrange(num_iters):
+    for it in xrange(num_iters):#xrange()是一个生成器,for中都要用这个
       X_batch = None
       y_batch = None
 
@@ -51,8 +51,11 @@ class LinearClassifier(object):
       # and y_batch should have shape (batch_size,)                           #
       #                                                                       #
       # Hint: Use np.random.choice to generate indices. Sampling with         #
-      # replacement is faster than sampling without replacement.              #
+      # replacement is faster than sampling without replacement.              #replacement是np.random.choice()的第三个参数，默认为true
       #########################################################################
+      indices=np.random.choice(range(num_train),batch_size)
+      X_batch=X[indices]
+      y_batch=y[indices]
       pass
       #########################################################################
       #                       END OF YOUR CODE                                #
@@ -67,6 +70,7 @@ class LinearClassifier(object):
       # TODO:                                                                 #
       # Update the weights using the gradient and the learning rate.          #
       #########################################################################
+      self.W-=grad*learning_rate
       pass
       #########################################################################
       #                       END OF YOUR CODE                                #
@@ -96,13 +100,14 @@ class LinearClassifier(object):
     # TODO:                                                                   #
     # Implement this method. Store the predicted labels in y_pred.            #
     ###########################################################################
+    y_pred=np.argmax(X.dot(self.W),axis=1)
     pass
     ###########################################################################
     #                           END OF YOUR CODE                              #
     ###########################################################################
     return y_pred
   
-  def loss(self, X_batch, y_batch, reg):
+  def loss(self, X_batch, y_batch, reg):#只是函数的声明
     """
     Compute the loss function and its derivative. 
     Subclasses will override this.
@@ -117,6 +122,7 @@ class LinearClassifier(object):
     - loss as a single float
     - gradient with respect to self.W; an array of the same shape as W
     """
+
     pass
 
 
