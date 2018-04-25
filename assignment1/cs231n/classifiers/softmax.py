@@ -38,7 +38,7 @@ def softmax_loss_naive(W, X, y, reg):
     loss += np.log(np.sum(np.exp(f))) - f[y[i]]
     dW[:,y[i]]-=X[i]
     for j in xrange(num_classes):
-        dW[:, j] += np.exp(f[j])*X[i]/np.sum(np.exp(f))
+        dW[:, j] += np.exp(f[j])*X[i]/np.sum(np.exp(f))#这里log没写底数默认为e，(e^x)'=e^x,(logx)'=1/(xlna)
   loss /= num_train
   dW /= num_train
 

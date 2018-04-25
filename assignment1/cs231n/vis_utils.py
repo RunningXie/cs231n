@@ -3,7 +3,7 @@ from past.builtins import xrange
 from math import sqrt, ceil
 import numpy as np
 
-def visualize_grid(Xs, ubound=255.0, padding=1):
+def visualize_grid(Xs, ubound=255.0, padding=1):#padding间距
   """
   Reshape a 4D tensor of image data to a grid for easy visualization.
 
@@ -13,7 +13,7 @@ def visualize_grid(Xs, ubound=255.0, padding=1):
   - padding: The number of blank pixels between elements of the grid
   """
   (N, H, W, C) = Xs.shape
-  grid_size = int(ceil(sqrt(N)))
+  grid_size = int(ceil(sqrt(N)))#ceil()向上舍入
   grid_height = H * grid_size + padding * (grid_size - 1)
   grid_width = W * grid_size + padding * (grid_size - 1)
   grid = np.zeros((grid_height, grid_width, C))
